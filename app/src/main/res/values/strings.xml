@@ -8,4 +8,7 @@
   <string name="save_label">Save</string>
   <string name="to">To</string>
   <string name="record_entry">Record Entry</string>
+  <string name="info">Info</string>
+    <string name="delete">DELETE</string>
+    <string name="share">SHARE</string>
 </resources>
