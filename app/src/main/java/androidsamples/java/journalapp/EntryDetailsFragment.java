@@ -50,17 +50,23 @@ public class EntryDetailsFragment extends Fragment {
   private Button mBtnDate, mBtnStartTime, mBtnEndTime, mBtnSave;
   private SharedViewModel sharedVM;
 
+  private String entryID;
+
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);
 
+    entryID = getArguments().get("entryId").toString();
+
     mEntryDetailsViewModel = new ViewModelProvider(getActivity()).get(EntryDetailsViewModel.class);
 
-    UUID entryId = UUID.fromString(getArguments().get("entryId").toString());
-    Log.d(TAG, "Loading entry: " + entryId);
+    if(entryID != "-1"){
+      UUID entryId = UUID.fromString(getArguments().get("entryId").toString());
+      Log.d(TAG, "Loading entry: " + entryId);
 
-    mEntryDetailsViewModel.loadEntry(entryId);
+      mEntryDetailsViewModel.loadEntry(entryId);
+    }
   }
 
   @Override
@@ -106,6 +112,9 @@ public class EntryDetailsFragment extends Fragment {
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
+    sharedVM.setDate(mBtnDate.getText().toString());
+    sharedVM.setStartTime(mBtnStartTime.getText().toString());
+    sharedVM.setEndTime(mBtnEndTime.getText().toString());
     outState.putString("title", mEditTitle.getText().toString());
   }
 
@@ -115,29 +124,43 @@ public class EntryDetailsFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     sharedVM = SharedViewModel.getInstance();
 
-    mEntryDetailsViewModel.getEntryLiveData().observe(getActivity(),
-            entry -> {
-              this.mEntry = entry;
-              if(savedInstanceState == null){
-                if(mEntry == null){
-                  sharedVM.setDate("");
-                  sharedVM.setStartTime("");
-                  sharedVM.setEndTime("");
-                  mEditTitle.setText("");
+    if(entryID == "-1"){
+      if(savedInstanceState == null) {
+        sharedVM.setDate("DATE");
+        sharedVM.setStartTime("START TIME");
+        sharedVM.setEndTime("END TIME");
+        mEditTitle.setText("");
+      }
+      else{
+        mEditTitle.setText(savedInstanceState.get("title").toString());
+      }
+      updateUI();
+
+    }
+    else{
+      mEntryDetailsViewModel.getEntryLiveData().observe(getActivity(),
+              entry -> {
+                this.mEntry = entry;
+                if(savedInstanceState == null){
+                  if(mEntry == null){
+                    sharedVM.setDate("");
+                    sharedVM.setStartTime("");
+                    sharedVM.setEndTime("");
+                    mEditTitle.setText("");
+                  }
+                  else{
+                    sharedVM.setDate(this.mEntry.date());
+                    sharedVM.setStartTime(this.mEntry.startTime());
+                    sharedVM.setEndTime(this.mEntry.endTime());
+                    mEditTitle.setText(this.mEntry.title());
+                  }
                 }
                 else{
-                  sharedVM.setDate(this.mEntry.date());
-                  sharedVM.setStartTime(this.mEntry.startTime());
-                  sharedVM.setEndTime(this.mEntry.endTime());
-                  mEditTitle.setText(this.mEntry.title());
+                  mEditTitle.setText(savedInstanceState.get("title").toString());
                 }
-              }
-              else{
-                mEditTitle.setText(savedInstanceState.get("title").toString());
-              }
-              updateUI();
-
-            });
+                updateUI();
+              });
+    }
 
     final NavController navController = Navigation.findNavController(view);
 
@@ -156,6 +179,11 @@ public class EntryDetailsFragment extends Fragment {
 
   private void saveEntry(View v) {
     Log.d(TAG, "Save button clicked");
+    if(entryID == "-1"){
+      JournalEntry entry = new JournalEntry(mEditTitle.getText().toString(), sharedVM.getDate(), sharedVM.getStartTime(), sharedVM.getEndTime());
+      JournalRepository.getInstance().insert(entry);
+      mEntry = entry;
+    }
     mEntry.setTitle(mEditTitle.getText().toString());
     mEntry.setDate(sharedVM.getDate());
     mEntry.setStartTime(sharedVM.getStartTime());

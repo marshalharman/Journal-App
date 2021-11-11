@@ -27,12 +27,14 @@ public class SharedViewModel {
         this.mDate = mDate;
     }
 
+
     public String getType() {
         return mType;
     }
     public void setType(String mType) {
         this.mType = mType;
     }
+
 
     public String getStartTime() {
         return mStartTime;
@@ -41,12 +43,12 @@ public class SharedViewModel {
         this.mStartTime = mStartTime;
     }
 
+
     public String getEndTime() {
         return mEndTime;
     }
     public void setEndTime(String mEndTime) {
         this.mEndTime = mEndTime;
     }
-
 }
 

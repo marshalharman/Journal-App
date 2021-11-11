@@ -13,7 +13,6 @@ import androidx.fragment.app.DialogFragment;
 import java.util.UUID;
 
 public class DeleteDialogFragment extends DialogFragment {
-    SharedViewModel sharedViewModel = SharedViewModel.getInstance();
     String entryID = "";
 
     public static DeleteDialogFragment newInstance(String id) {
@@ -42,7 +41,6 @@ public class DeleteDialogFragment extends DialogFragment {
     public void doPositiveClick() {
         // Do stuff here.
         Log.i("FragmentAlertDialog", "Positive click!");
-
         JournalRepository.getInstance().delete(UUID.fromString(entryID));
         getActivity().onBackPressed();
         dismiss();

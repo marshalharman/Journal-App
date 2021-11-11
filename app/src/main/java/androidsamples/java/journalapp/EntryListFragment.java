@@ -74,11 +74,12 @@ public class EntryListFragment extends Fragment {
     fab.setOnClickListener(new View.OnClickListener(){
       @Override
       public void onClick(View view) {
-        JournalEntry entry = addNewEntry(view);
+//        JournalEntry entry = addNewEntry(view);
 
         EntryListFragmentDirections.AddEntryAction action = EntryListFragmentDirections.addEntryAction();
 
-        action.setEntryId(entry.getUid().toString());
+//        action.setEntryId(entry.getUid().toString());
+        action.setEntryId("-1");
         Navigation.findNavController(view).navigate(action);
       }
     });
@@ -94,6 +95,7 @@ public class EntryListFragment extends Fragment {
 
   public JournalEntry addNewEntry(View view) {
     JournalEntry entry = new JournalEntry("", "DATE", "START TIME", "END TIME");
+
     mEntryListViewModel.insert(entry);
     return entry;
   }

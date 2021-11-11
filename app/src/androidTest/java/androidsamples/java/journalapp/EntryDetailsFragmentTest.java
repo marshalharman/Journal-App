@@ -43,6 +43,5 @@ public class EntryDetailsFragmentTest {
     // Verify that performing a click changes the NavController's state
     onView(ViewMatchers.withId(R.id.btn_add_entry)).perform(ViewActions.click());
     assertThat(Objects.requireNonNull(navController.getCurrentDestination()).getId(), is(R.id.entryDetailsFragment));
-
   }
 }
