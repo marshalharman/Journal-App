@@ -25,4 +25,8 @@ public interface  JournalEntryDao {
 
     @Update
     void update(JournalEntry entry);
+
+    @Query("SELECT * from journal_table ORDER BY id ASC")
+    List<JournalEntry> getSyncAllEntries();
+
 }

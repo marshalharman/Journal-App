@@ -41,7 +41,9 @@ public class DeleteDialogFragment extends DialogFragment {
     public void doPositiveClick() {
         // Do stuff here.
         Log.i("FragmentAlertDialog", "Positive click!");
-        JournalRepository.getInstance().delete(UUID.fromString(entryID));
+        if(entryID != "-1"){
+            JournalRepository.getInstance().delete(UUID.fromString(entryID));
+        }
         getActivity().onBackPressed();
         dismiss();
     }

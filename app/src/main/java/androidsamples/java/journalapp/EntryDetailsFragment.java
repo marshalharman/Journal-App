@@ -78,9 +78,14 @@ public class EntryDetailsFragment extends Fragment {
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     if(item.getItemId() == R.id.menu_delete){
-//      DialogFragment deleteDialog = new DeleteDialogFragment().show(getChildFragmentManager(), "DELETE");
-        DialogFragment deleteDialog = DeleteDialogFragment.newInstance(mEntry.getUid().toString());
-        deleteDialog.show(getFragmentManager(),"dialog");
+      DialogFragment deleteDialog;
+      if(entryID == "-1"){
+        deleteDialog = DeleteDialogFragment.newInstance("-1");
+      }
+      else{
+        deleteDialog = DeleteDialogFragment.newInstance(mEntry.getUid().toString());
+      }
+      deleteDialog.show(getFragmentManager(),"dialog");
 
     }
     if(item.getItemId() == R.id.menu_share){
