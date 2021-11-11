@@ -18,6 +18,7 @@ A basic journal app which allows user to record their day to day activities. Eac
 ### Bugs:
 This app does not checks if end time is greater than start time or not. Technically, end time should be after start time but a user can set otherwise.
 
+
 ## c) TASKS DESCRIPTION
 ### Task1: Implementing the Navigation
 * Added args for navigating to entryDetailsFragment.
@@ -32,17 +33,19 @@ This app does not checks if end time is greater than start time or not. Technica
 
 ### Task3: DELETE Button
 * Created menu resource file and added delete button in menu.
-* Created dialogFragment for delete.
+* Implemented a dialogFragment for delete and function for different tasks on pressing YES/NO in the dialog.
 * Implemented navigation to dialogFragment from entryDetailsFragment.
 
-### Task4: Share Button
+### Task4: SHARE Button
 * Created share button in the menu resource file for entryDetailsFragment.
 * Implemented implicit intent for finding the possible apps for sharing.
 
-### Task5: 
+### Task5: INFO button
+* Created menu resource file for entryListFragment and added Info button in menu.
+* Created dialogFragment for Info and implemented navigation using id.
 
-
-
+### Task6: Accessibilty
+* Tested on the given test and a few custom tests for navigating from different fragments. 
 
 
 ## d) Stress Testing: 
