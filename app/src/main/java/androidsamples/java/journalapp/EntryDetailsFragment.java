@@ -18,6 +18,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
@@ -59,7 +60,6 @@ public class EntryDetailsFragment extends Fragment {
     UUID entryId = UUID.fromString(getArguments().get("entryId").toString());
     Log.d(TAG, "Loading entry: " + entryId);
 
-
     mEntryDetailsViewModel.loadEntry(entryId);
   }
 
@@ -72,8 +72,10 @@ public class EntryDetailsFragment extends Fragment {
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     if(item.getItemId() == R.id.menu_delete){
-      deleteEntry(this.getView());
-      return true;
+//      DialogFragment deleteDialog = new DeleteDialogFragment().show(getChildFragmentManager(), "DELETE");
+        DialogFragment deleteDialog = DeleteDialogFragment.newInstance(mEntry.getUid().toString());
+        deleteDialog.show(getFragmentManager(),"dialog");
+
     }
     if(item.getItemId() == R.id.menu_share){
       Intent intent = new Intent(Intent.ACTION_SEND);
@@ -83,7 +85,6 @@ public class EntryDetailsFragment extends Fragment {
     }
     return super.onOptionsItemSelected(item);
   }
-
 
   @Nullable
   @Override
@@ -163,12 +164,6 @@ public class EntryDetailsFragment extends Fragment {
     getActivity().onBackPressed();
   }
 
-  private void deleteEntry(View v){
-    getActivity().onBackPressed();
-    Log.d(TAG, "deletion");
-    mEntryDetailsViewModel.deleteEntry(mEntry.getUid());
-
-  }
 
   private void updateUI() {
     mBtnDate.setText(sharedVM.getDate());

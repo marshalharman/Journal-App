@@ -23,7 +23,6 @@ public class SharedViewModel {
     public String getDate() {
         return mDate;
     }
-
     public void setDate(String mDate) {
         this.mDate = mDate;
     }
@@ -31,7 +30,6 @@ public class SharedViewModel {
     public String getType() {
         return mType;
     }
-
     public void setType(String mType) {
         this.mType = mType;
     }
@@ -39,17 +37,16 @@ public class SharedViewModel {
     public String getStartTime() {
         return mStartTime;
     }
-
     public void setStartTime(String mStartTime) {
         this.mStartTime = mStartTime;
     }
 
-
     public String getEndTime() {
         return mEndTime;
     }
-
     public void setEndTime(String mEndTime) {
         this.mEndTime = mEndTime;
     }
+
 }
+
