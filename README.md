@@ -30,4 +30,24 @@ This app does not checks if end time is greater than start time or not. Technica
 * Added delete query in the Dao and delete function in the Repository for deleting an entry.
 * Added a function for getting all the entries as a list for testing in the DAO.
 
-### Task3: 
+### Task3: DELETE Button
+* Created menu resource file and added delete button in menu.
+* Created dialogFragment for delete.
+* Implemented navigation to dialogFragment from entryDetailsFragment.
+
+### Task4: Share Button
+* Created share button in the menu resource file for entryDetailsFragment.
+* Implemented implicit intent for finding the possible apps for sharing.
+
+### Task5: 
+
+
+
+
+
+## d) Stress Testing: 
+Monkey tool was used with 500, 1000 and 10000 events. No crashes or issues were observed.
+
+## e) Number of hours took to complete: 75
+
+## f) Difficulty: 10
