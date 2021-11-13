@@ -46,6 +46,7 @@ public class JournalRepository {
     public void delete(UUID entryID){
         mExecutor.execute(() -> mJournalEntryDao.deleteEntry(entryID));
     }
+
     public LiveData<List<JournalEntry>> getAllEntries() {
         return mJournalEntryDao.getAllEntries();
     }

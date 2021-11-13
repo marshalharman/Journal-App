@@ -190,17 +190,40 @@ public class EntryDetailsFragment extends Fragment {
       mEntry = entry;
     }
     mEntry.setTitle(mEditTitle.getText().toString());
-    mEntry.setDate(sharedVM.getDate());
-    mEntry.setStartTime(sharedVM.getStartTime());
-    mEntry.setEndTime(sharedVM.getEndTime());
+    if(sharedVM.getDate().equals("DATE")){
+      mEntry.setDate("");
+    }
+    else mEntry.setDate(sharedVM.getDate());;
+
+    if( sharedVM.getStartTime().equals("START TIME")){
+      mEntry.setStartTime("");
+    }
+    else mEntry.setStartTime(sharedVM.getStartTime());
+
+    if( sharedVM.getEndTime().equals("END TIME")){
+      mEntry.setEndTime("");
+    }
+    else mEntry.setEndTime(sharedVM.getEndTime());
+
     mEntryDetailsViewModel.saveEntry(mEntry);
     getActivity().onBackPressed();
   }
 
 
   private void updateUI() {
-    mBtnDate.setText(sharedVM.getDate());
-    mBtnStartTime.setText(sharedVM.getStartTime());
-    mBtnEndTime.setText(sharedVM.getEndTime());
+    if(sharedVM.getDate().equals("")){
+      mBtnDate.setText("DATE");
+    }
+    else mBtnDate.setText(sharedVM.getDate());
+
+    if( sharedVM.getStartTime().equals("")){
+      mBtnStartTime.setText("START TIME");
+    }
+    else mBtnStartTime.setText(sharedVM.getStartTime());
+
+    if( sharedVM.getEndTime().equals("")){
+      mBtnEndTime.setText("END TIME");
+    }
+    else mBtnEndTime.setText(sharedVM.getEndTime());
   }
 }
